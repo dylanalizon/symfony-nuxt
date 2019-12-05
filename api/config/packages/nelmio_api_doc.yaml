@@ -1,0 +1,16 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Symfony Nuxt
+            version: 1.0.0
+        securityDefinitions:
+            Bearer:
+                type: apiKey
+                description: 'Value: Bearer {jwt}'
+                name: Authorization
+                in: header
+        security:
+            - Bearer: []
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/(?!doc)(?!_) # Accepts routes under /api except /api/doc
