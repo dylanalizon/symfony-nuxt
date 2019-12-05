@@ -11,6 +11,43 @@ nelmio_api_doc:
                 in: header
         security:
             - Bearer: []
+        paths:
+            /login_check:
+                post:
+                    tags:
+                        - Security
+                    description: Login into the api.
+                    produces:
+                        - application/json
+                    parameters:
+                        - name: user
+                          description: User to login
+                          in: body
+                          required: true
+                          schema:
+                              type: object
+                              properties:
+                                  username:
+                                      type: string
+                                  password:
+                                      type: string
+                    responses:
+                        '200':
+                            description: Login successful
+                            schema:
+                                type: object
+                                properties:
+                                    token:
+                                        type: string
+                        '401':
+                            description: Invalid credentials
+                            schema:
+                                type: object
+                                properties:
+                                    code:
+                                        type: string
+                                    message:
+                                        type: string
     areas: # to filter documented areas
         path_patterns:
             - ^/(?!doc)(?!_) # Accepts routes under /api except /api/doc
