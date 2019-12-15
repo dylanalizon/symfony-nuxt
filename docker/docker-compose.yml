@@ -194,6 +194,7 @@ services:
         - "${NGINX_HOST_HTTPS_PORT}:443"
       depends_on:
         - php-fpm
+        - node
       networks:
         - frontend
         - backend
@@ -217,3 +218,17 @@ services:
         - "${MYSQL_PORT}:3306"
       networks:
         - backend
+
+### Node #################################################
+    node:
+      image: node:lts-alpine
+      working_dir: "/var/www/app"
+      environment:
+        - HOST=0.0.0.0
+      ports:
+        - "3000:3000"
+      volumes:
+        - ../client:/var/www/app
+      command: yarn dev
+      networks:
+        - frontend
